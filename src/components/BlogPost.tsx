@@ -17,6 +17,8 @@ const BlogPost = ({ posts }: { posts: Array<Post> }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const component = useRef(null);
     const itemsRef = useRef<Array<HTMLDivElement | null>>([]);
+    const [hovering, setHovering] = useState(false);
+    const lastMousePos = useRef({ x: 0, y: 0 });
 
     useEffect(() => {
         let ctx = gsap.context(() => {
@@ -45,7 +47,31 @@ const BlogPost = ({ posts }: { posts: Array<Post> }) => {
 
             return () => ctx.revert();
         }, component);
-    }, [posts]);
+    }, []);
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            const mousePos = { x: e.clientX, y: e.clientY + window.scrollY };
+            const speed = Math.sqrt(Math.pow(mousePos.x - lastMousePos.current.x, 2));
+
+            let ctx = gsap.context(() => {
+                lastMousePos.current = mousePos;
+                return () => ctx.revert();
+            }, component);
+        };
+        window.addEventListener("mousemove", handleMouseMove);
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+        };
+    }, [hovering]);
+
+    const onMouseEnter = (index: number) => {
+        if (!hovering) setHovering(true);
+    };
+
+    const onMouseLeave = () => {
+        setHovering(false);
+    };
 
     const filteredPosts = posts.filter((post) =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -54,7 +80,9 @@ const BlogPost = ({ posts }: { posts: Array<Post> }) => {
 
     return (
         <>
-            <div ref={component} className="container mx-auto py-6 space-y-6">
+            <div ref={component} className="container py-6 space-y-6"
+                onMouseLeave={onMouseLeave}
+            >
                 <div className="mb-6">
                     <div className="relative">
                         <input
@@ -81,7 +109,8 @@ const BlogPost = ({ posts }: { posts: Array<Post> }) => {
                 {filteredPosts.map((post) => (
                     <motion.div
                         key={post.id}
-                        className="post border-b-2 border-slate-200 flex flex-col sm:flex-row py-2 sm:py-6"
+                        ref={(el: any) => (itemsRef.current[post.id] = el)}
+                        className="post border-b-2 border-slate-200 flex flex-col sm:flex-row py-2 sm:py-6 gap-x-10"
                         transition={{ duration: 0.3 }}
                     >
                         <div>
@@ -90,14 +119,14 @@ const BlogPost = ({ posts }: { posts: Array<Post> }) => {
                                 alt="blog"
                                 width={800}
                                 height={400}
-                                className="rounded w-full h-60 sm:w-56 sm:h-auto cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out"
+                                className="rounded w-full sm:w-80 h-auto sm:h-48 cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out"
                                 onClick={() => {
                                     setModalImage(post.thumbnail);
                                     setShowModal(true);
                                 }}
                             />
                         </div>
-                        <div className="max-sm:py-4 sm:px-4 flex flex-col">
+                        <div className="max-sm:py-4 sm:px-4 flex flex-col w-full">
                             <motion.span
                                 className="text-dark text-2xl font-semibold transition-colors duration-300 ease-in-out hover:text-primary dark:text-slate-200"
                             >
@@ -111,9 +140,9 @@ const BlogPost = ({ posts }: { posts: Array<Post> }) => {
                                     {post.author}
                                 </span>
                             </span>
-                            <p className="text-dark text-sm mt-4 dark:text-slate-200">
-                                {post.description}
-                            </p>
+                            <div className="text-dark text-sm mt-4 dark:text-slate-200 prose min-w-full">
+                                {post.description.length > 300 ? post.description.slice(0, 300) + "..." : post.description}
+                            </div>
                         </div>
                     </motion.div>
                 ))}

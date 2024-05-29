@@ -6,7 +6,7 @@ const data = [
         "title": "Understanding React Hooks",
         "date": "2023-04-12",
         "author": "Jane Doe",
-        "description": "A comprehensive guide to understanding and using React Hooks in your applications.",
+        "description": "A comprehensive guide to understanding and using React Hooks in your applications. Learn how to use useState, useEffect, and custom hooks to manage state and side effects in functional components. Includes examples and best practices.Learn how to use useState, useEffect, and custom hooks to manage state and side effects in functional components. Includes examples and best practices.Learn how to use useState, useEffect, and custom hooks to manage state and side effects in functional components. Includes examples and best practices.Learn how to use useState, useEffect, and custom hooks to manage state and side effects in functional components. Includes examples and best practices.Learn how to use useState, useEffect, and custom hooks to manage state and side effects in functional components. Includes examples and best practices.Learn how to use useState, useEffect, and custom hooks to manage state and side effects in functional components. Includes examples and best practices.Learn how to use useState, useEffect, and custom hooks to manage state and side effects in functional components. Includes examples and best practices.Learn how to use useState, useEffect, and custom hooks to manage state and side effects in functional components. Includes examples and best practices. ",
         "thumbnail": "/assets/images/blog-1.jpg"
     },
     {

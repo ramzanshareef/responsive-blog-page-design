@@ -40,7 +40,14 @@ export default function Navbar() {
                 >
                     Blog Website
                 </Link>
-                <div className="sm:hidden block">
+                <div className="sm:hidden flex flex-row items-center gap-x-3">
+                    <MdDarkMode
+                        className="w-6 h-6 cursor-pointer dark:text-white transition-colors duration-300"
+                        onClick={() => {
+                            document.documentElement.classList.toggle("dark");
+                            localStorage.setItem("theme", "light");
+                        }}
+                    />
                     <IoReorderThreeSharp
                         className={`w-9 h-9 cursor-pointer ${showNavbar === false ? "block" : "hidden"}`}
                         onClick={toggleNavbar}
@@ -56,15 +63,8 @@ export default function Navbar() {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
                                 transition={{ duration: 0.3 }}
-                                className={clsx("flex flex-col items-end space-y-4 absolute top-16 right-4 bg-white dark:bg-black text-dark dark:text-white p-4 rounded-lg shadow-lg")}
+                                className={clsx("flex flex-col items-end space-y-4 absolute top-16 right-4 bg-white dark:bg-slate-500 text-dark dark:text-white p-4 rounded-lg shadow-lg")}
                             >
-                                <MdDarkMode
-                                    className="w-8 h-8 cursor-pointer dark:text-white transition-colors duration-300"
-                                    onClick={() => {
-                                        document.documentElement.classList.toggle("dark");
-                                        localStorage.setItem("theme", "light");
-                                    }}
-                                />
                                 <Link href="/blogs" className="hover:text-primary text-primary dark:hover:text-primary transition-colors duration-300">
                                     Blogs
                                 </Link>

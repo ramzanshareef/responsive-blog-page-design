@@ -5,10 +5,10 @@ export default async function Home() {
     const posts = await getBlogPosts();
     return (
         <main className="px-4 py-4 md:px-40">
-            <div className="mx-auto w-full max-w-7xl">
-                <span className="text-dark dark:text-white text-2xl sm:text-3xl font-semibold">
+            <div className="max-w-7xl">
+                <div className="text-dark dark:text-white text-2xl sm:text-3xl font-semibold">
                     Blogs
-                </span>
+                </div>
                 <div className="mt-4">
                     <BlogPost posts={posts} />
                 </div>
