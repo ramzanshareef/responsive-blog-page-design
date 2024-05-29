@@ -3,6 +3,7 @@ import { Heebo } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import clsx from "clsx";
 
 const heebo = Heebo({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={heebo.className}>
+            <body className={clsx(heebo.className, "dark:bg-slate-600")}>
                 <Navbar />
                 {children}
                 <Footer />

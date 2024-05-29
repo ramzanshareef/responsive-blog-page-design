@@ -4,7 +4,7 @@ import { FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa6";
 
 export default function Footer() {
     return (
-        <footer className="flex flex-col gap-y-4 items-center justify-center w-full h-24 mt-10">
+        <footer className="flex flex-col gap-y-4 items-center justify-center w-full h-24 mt-10 dark:text-white">
             <div className="flex items-center justify-center space-x-4">
                 <Link
                     href="/"
@@ -32,7 +32,7 @@ export default function Footer() {
                 </Link>
             </div>
             <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-gray-500 dark:text-slate-200">
                     © 2024 All rights reserved
                 </p>
             </div>
