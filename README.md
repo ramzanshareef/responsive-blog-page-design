@@ -18,7 +18,7 @@
 
 **Step 1:** Clone the repository
 ```bash
-git clone "https://github.com/itisRamzan/responsive-blog-page-design"
+git clone "https://github.com/ramzanshareef/responsive-blog-page-design"
 ```
 
 **Step 2:** Install the dependencies
